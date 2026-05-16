@@ -96,7 +96,7 @@ async function selectVisibleOption(page: Page, optionName: string) {
 }
 
 async function selectOption(page: Page, comboboxIndex: number, optionName: string) {
-  await page.locator('.ant-select-selector').nth(comboboxIndex).click({ force: true });
+  await page.locator('.ant-select').nth(comboboxIndex).click({ force: true });
   await selectVisibleOption(page, optionName);
 }
 
@@ -219,10 +219,10 @@ test.describe('智能API服务站 - single-file test case demo', () => {
     await page.getByRole('tab', { name: /注\s*册|注册/ }).click();
 
     await expect(page.getByRole('dialog')).toBeVisible();
-    await expect(page.getByPlaceholder('用户名')).toBeVisible();
+    await expect(page.locator('#register_username')).toBeVisible();
     await expect(page.getByPlaceholder('邮箱')).toBeVisible();
     await expect(page.getByPlaceholder('手机号（选填）')).toBeVisible();
-    await expect(page.getByPlaceholder('密码')).toBeVisible();
+    await expect(page.locator('#register_password')).toBeVisible();
     await expect(page.getByPlaceholder('确认密码')).toBeVisible();
   });
 
