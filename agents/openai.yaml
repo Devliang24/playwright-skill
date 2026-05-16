@@ -1,0 +1,4 @@
+interface:
+  display_name: "Playwright Skill"
+  short_description: "Build and debug Playwright UI tests"
+  default_prompt: "Use $playwright-skill to add Playwright UI automation tests to this web project."
