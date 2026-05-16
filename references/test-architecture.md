@@ -62,6 +62,7 @@ Do not hide important user flow steps in fixtures unless they are true setup, su
 For a first setup:
 
 - One project: Chromium.
+- Headed browser execution by default: `headless: false`.
 - `trace: "retain-on-failure"`.
 - `screenshot: "only-on-failure"`.
 - `video: "retain-on-failure"`.

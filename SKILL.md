@@ -23,7 +23,7 @@ This skill focuses on local Playwright testing, reports, and failure artifacts.
    - Locator strategy: `references/selector-strategy.md`
    - Local reports and failure artifacts: `references/reporting.md`
 5. Implement with the repo's existing package manager, TypeScript settings, and naming conventions. If no Playwright setup exists, use `assets/playwright-template/` or `scripts/scaffold_playwright.sh`.
-6. Run the narrowest useful local verification, usually `npx playwright test` or a single spec. Report pass/fail counts, report path, and the most useful failure artifact.
+6. Run the narrowest useful local verification in headed mode by default, usually `npx playwright test --headed` or a single spec. Report pass/fail counts, report path, and the most useful failure artifact.
 
 ## External Site Demo Mode
 
@@ -41,6 +41,7 @@ This creates `tests/smart-api-shop.spec.ts`. It intentionally keeps the demo at 
 
 - Use Playwright Test with TypeScript.
 - Prefer Chromium for the first working baseline. Add Firefox or WebKit only when requested or already present.
+- Default generated configs and run commands to headed browser execution (`headless: false` / `--headed`). Use headless mode only when the user explicitly asks for silent/background execution.
 - Use `tests/specs`, `tests/pages`, `tests/fixtures`, and `tests/utils` when creating a new structure.
 - Prefer accessible locators: `getByRole`, `getByLabel`, `getByPlaceholder`, `getByText`, then `getByTestId`. Avoid brittle CSS and XPath unless the UI gives no stable alternative.
 - Do not hardcode secrets. Use environment variables or existing project secret handling.

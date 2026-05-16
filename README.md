@@ -9,6 +9,7 @@ Playwright Skill 可以帮助 Codex 先检查前端项目，再选择合适的 P
 - 为 Web 项目添加可维护的 Playwright Test 配置。
 - 生成最小可用的 smoke 测试、fixture 和 page object。
 - 为外部 URL 生成单文件、测试用例颗粒度的 Playwright 演示脚本。
+- 默认以打开浏览器的 headed 模式编写和执行用例，方便观察真实 UI。
 - 在修改文件前，引导 Codex 先完成项目信息采集。
 - 鼓励使用稳定、可访问性优先的 locator。
 - 根据本地失败产物调试 Playwright 用例。
@@ -121,6 +122,8 @@ playwright-skill/
 - `tests/pages/example.page.ts`
 - `test:e2e`、`test:e2e:headed`、`test:e2e:debug`、`test:e2e:report` 等 npm scripts
 
+默认配置会设置 `headless: false`，`test:e2e` 也会使用 `playwright test --headed`，因此本地执行时会打开浏览器窗口。
+
 脚手架生成后，在目标项目中按项目使用的包管理器安装 Playwright：
 
 ```bash
@@ -176,7 +179,7 @@ package.json                # 仅当需要补 npm scripts 且目标目录已有 
 ```json
 {
   "scripts": {
-    "test:smart-api-shop": "playwright test tests/smart-api-shop.spec.ts"
+    "test:smart-api-shop": "playwright test tests/smart-api-shop.spec.ts --headed"
   }
 }
 ```
@@ -184,7 +187,7 @@ package.json                # 仅当需要补 npm scripts 且目标目录已有 
 运行命令：
 
 ```bash
-npx playwright test tests/smart-api-shop.spec.ts
+npx playwright test tests/smart-api-shop.spec.ts --headed
 ```
 
 或：

@@ -260,6 +260,7 @@ export default defineConfig({
   ],
   use: {
     baseURL: process.env.PLAYWRIGHT_BASE_URL ?? '__BASE_URL__',
+    headless: false,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -285,8 +286,11 @@ const path = 'package.json';
 const pkg = JSON.parse(fs.readFileSync(path, 'utf8'));
 
 pkg.scripts = pkg.scripts || {};
-if (!pkg.scripts['test:smart-api-shop']) {
-  pkg.scripts['test:smart-api-shop'] = 'playwright test tests/smart-api-shop.spec.ts';
+if (
+  !pkg.scripts['test:smart-api-shop'] ||
+  pkg.scripts['test:smart-api-shop'] === 'playwright test tests/smart-api-shop.spec.ts'
+) {
+  pkg.scripts['test:smart-api-shop'] = 'playwright test tests/smart-api-shop.spec.ts --headed';
 }
 
 fs.writeFileSync(path, `${JSON.stringify(pkg, null, 2)}\n`);
@@ -299,7 +303,7 @@ fi
 echo
 echo "Smart API Shop demo is ready."
 echo "Run:"
-echo "  npx playwright test tests/smart-api-shop.spec.ts"
+echo "  npx playwright test tests/smart-api-shop.spec.ts --headed"
 echo
 echo "Optional base URL override:"
-echo "  PLAYWRIGHT_BASE_URL=$BASE_URL npx playwright test tests/smart-api-shop.spec.ts"
+echo "  PLAYWRIGHT_BASE_URL=$BASE_URL npx playwright test tests/smart-api-shop.spec.ts --headed"

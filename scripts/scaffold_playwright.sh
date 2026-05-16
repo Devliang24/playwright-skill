@@ -93,7 +93,7 @@ node <<'NODE'
 const fs = require('fs');
 const path = 'package.json';
 const scripts = {
-  'test:e2e': 'playwright test',
+  'test:e2e': 'playwright test --headed',
   'test:e2e:headed': 'playwright test --headed',
   'test:e2e:debug': 'playwright test --debug',
   'test:e2e:report': 'playwright show-report'
@@ -105,7 +105,9 @@ const pkg = fs.existsSync(path)
 
 pkg.scripts = pkg.scripts || {};
 for (const [key, value] of Object.entries(scripts)) {
-  if (!pkg.scripts[key]) pkg.scripts[key] = value;
+  if (!pkg.scripts[key] || (key === 'test:e2e' && pkg.scripts[key] === 'playwright test')) {
+    pkg.scripts[key] = value;
+  }
 }
 
 fs.writeFileSync(path, `${JSON.stringify(pkg, null, 2)}\n`);
@@ -116,4 +118,4 @@ echo "Playwright scaffold complete."
 echo "Next:"
 echo "  install @playwright/test with this project's package manager"
 echo "  run: npx playwright install"
-echo "  run: PLAYWRIGHT_BASE_URL=$BASE_URL npx playwright test"
+echo "  run: PLAYWRIGHT_BASE_URL=$BASE_URL npx playwright test --headed"

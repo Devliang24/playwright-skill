@@ -13,9 +13,8 @@ Default local artifacts:
 ## Useful commands
 
 ```bash
-npx playwright test
-npx playwright test tests/specs/smoke.spec.ts
 npx playwright test --headed
+npx playwright test tests/specs/smoke.spec.ts --headed
 npx playwright test --debug
 npx playwright show-report
 ```
