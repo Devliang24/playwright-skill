@@ -66,6 +66,7 @@ playwright-skill/
 │   ├── test-architecture.md
 │   └── user-interaction.md
 ├── scripts/
+│   ├── create_smart_api_shop_demo.sh
 │   ├── inspect_project.sh
 │   └── scaffold_playwright.sh
 └── assets/
@@ -94,6 +95,20 @@ playwright-skill/
 
 `scaffold_playwright.sh` 会复制模板文件，并在缺少对应命令时补充本地 Playwright npm scripts。它不会自动安装依赖。
 
+生成“智能API服务站”的单脚本测试用例演示：
+
+```bash
+./scripts/create_smart_api_shop_demo.sh /path/to/demo-project
+```
+
+指定被测地址：
+
+```bash
+./scripts/create_smart_api_shop_demo.sh /path/to/demo-project --base-url http://110.40.159.145:5173
+```
+
+这个脚本会生成 `tests/smart-api-shop.spec.ts`，用 `TC-001`、`TC-002` 这样的测试用例颗粒度组织断言，不拆 page object 或完整业务测试框架。
+
 ## 生成的 Playwright 基线
 
 模板会生成：
@@ -113,6 +128,24 @@ npm run test:e2e
 ```
 
 如果项目使用 `pnpm`、`yarn` 或 `bun`，请使用对应命令。
+
+## 智能API服务站单脚本演示
+
+可以让 Codex 通过下面的方式触发：
+
+```text
+使用 $playwright-skill，以 http://110.40.159.145:5173/ 作为测试对象，生成单脚本 Playwright 测试用例演示。
+```
+
+Codex 会生成一个自包含的 `tests/smart-api-shop.spec.ts`，默认覆盖商品列表、搜索、分类筛选、排序、分页、商品详情、数量控件、登录弹窗和注册字段展示。
+
+运行命令：
+
+```bash
+npx playwright test tests/smart-api-shop.spec.ts
+```
+
+脚本中会保留购物车和订单相关测试，但默认使用 `test.skip` 跳过，因为这些用例会写入共享演示环境。
 
 ## Skill 原则
 
@@ -136,4 +169,5 @@ python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py .
 ```bash
 bash -n scripts/inspect_project.sh
 bash -n scripts/scaffold_playwright.sh
+bash -n scripts/create_smart_api_shop_demo.sh
 ```

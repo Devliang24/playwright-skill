@@ -14,6 +14,19 @@ tests/
 
 Use existing project conventions when they already differ and are coherent.
 
+## Demo and POC exception
+
+For an external URL demo, proof of concept, or throwaway showcase, prefer a single spec file organized by test case IDs. Do not introduce page objects, fixtures, or a long-lived folder structure unless the user asks to turn the demo into maintained regression coverage.
+
+For example:
+
+```text
+tests/
+└── smart-api-shop.spec.ts
+```
+
+Keep each test focused on one observable behavior and name it with `TC-001`, `TC-002`, and so on.
+
 ## Spec files
 
 Spec files describe user behavior, not implementation details. Keep a first smoke spec small:
